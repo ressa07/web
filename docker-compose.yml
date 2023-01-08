@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    tty: true
+    volumes:
+      - ./api:/var/www/api
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8096:80
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - ./static:/var/www/html
+    depends_on:
+      - api
